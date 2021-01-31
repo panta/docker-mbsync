@@ -1,4 +1,8 @@
 FROM golang:alpine AS build
+MAINTAINER Marco Pantaleoni <marco.pantaleoni@gmail.com>
+
+ENV LANG=C.UTF-8
+
 RUN apk add --no-cache shellcheck
 
 RUN mkdir /overlay
@@ -7,7 +11,10 @@ RUN find /overlay -type f | xargs shellcheck -e SC1008
 
 
 FROM oznu/s6-alpine:3.12
-LABEL maintainer="Jake Wharton <docker@jakewharton.com>"
+MAINTAINER Marco Pantaleoni <marco.pantaleoni@gmail.com>
+LABEL maintainer="Marco Pantaleoni <marco.pantaleoni@gmail.com>"
+
+ENV LANG=C.UTF-8
 
 ENV \
     # Fail if cont-init scripts exit with non-zero code.
@@ -27,3 +34,5 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community > /etc/apk/reposi
  && mkdir /var/cache/apk
 
 COPY root/ /
+
+# ENTRYPOINT ["/app/sync.sh"]

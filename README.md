@@ -1,15 +1,17 @@
-Docker Mailbox Sync
-===================
+docker-mbsync
+=============
+
+This is a fork of [JakeWharton/docker-mbsync](https://github.com/JakeWharton/docker-mbsync).
 
 A Docker container which runs the [`mbsync`][1] tool automatically to synchronize your email.
 
  [1]: http://isync.sourceforge.net/mbsync.html
 
-[![Docker Image Version](https://img.shields.io/docker/v/jakewharton/mbsync?sort=semver)][hub]
-[![Docker Image Size](https://img.shields.io/docker/image-size/jakewharton/mbsync)][layers]
+[![Docker Image Version](https://img.shields.io/docker/v/panta/mbsync?sort=semver)][hub]
+[![Docker Image Size](https://img.shields.io/docker/image-size/panta/mbsync)][layers]
 
- [hub]: https://hub.docker.com/r/jakewharton/mbsync/
- [layers]: https://microbadger.com/images/jakewharton/mbsync
+ [hub]: https://hub.docker.com/r/panta/mbsync/
+ [layers]: https://microbadger.com/images/panta/mbsync
 
 
 Setup
@@ -69,7 +71,7 @@ This allows you to temporarily interrupt it at any point and also restart if it 
 $ docker run -it --rm
     -v /path/to/config:/config \
     -v /path/to/mail:/mail \
-    jakewharton/mbsync \
+    c \
     /app/sync.sh
 ```
 
@@ -85,7 +87,7 @@ $ docker run -it --rm
     -v /path/to/config:/config \
     -v /path/to/mail:/mail \
     -e "CRON=0 * * * *" \
-    jakewharton/mbsync
+    panta/mbsync
 ```
 
 The above version will run every hour and download any new emails. For help creating a valid cron specifier, visit [cron.help][2].
@@ -108,7 +110,7 @@ To write data as a particular user, the `PUID` and `PGID` environment variables 
 version: '2'
 services:
   mbsync:
-    image: jakewharton/mbsync:latest
+    image: panta/mbsync:latest
     restart: unless-stopped
     volumes:
       - /path/to/config:/config
@@ -122,7 +124,7 @@ services:
 ```
 
 Note: You may want to specify an explicit version rather than `latest`.
-See https://hub.docker.com/r/jakewharton/mbsync/tags.
+See https://hub.docker.com/r/panta/mbsync/tags.
 
 
 
@@ -132,3 +134,7 @@ LICENSE
 MIT. See `LICENSE.txt`.
 
     Copyright 2020 Jake Wharton
+
+Modifications are:
+
+    Copyright 2021 Marco Pantaleoni
